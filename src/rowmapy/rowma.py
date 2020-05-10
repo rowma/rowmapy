@@ -11,11 +11,11 @@ class Rowma:
         self.namespace = '/rowma'
         self.handlers = {}
 
-    def connect(self, robot_uuid):
+    def connect(self):
         self.sio.connect(self.base_url, namespaces=[self.namespace])
         # sleep 1 second for connection establishment
         self.sio.sleep(1)
-        payload = { 'deviceUuid': self.uuid, 'robotUuid': robot_uuid }
+        payload = { 'deviceUuid': self.uuid }
         self.sio.emit('register_device', data=payload, namespace=self.namespace)
         self.sio.on('topic_to_device', handler=self._baseHandler, namespace=self.namespace)
 
@@ -74,6 +74,13 @@ class Rowma:
 
     def subscribe(self, topic, handler, namespace=None):
         self.handlers[topic] = handler
+
+    def set_robot_uuid(self, robot_uuid):
+        payload = {
+                'uuid': self.uuid,
+                'robotUuid': robot_uuid
+                }
+        self.sio.emit('update_application', payload, namespace=self.namespace)
 
     def _baseHandler(self, msg):
         if msg['topic'] in self.handlers:
