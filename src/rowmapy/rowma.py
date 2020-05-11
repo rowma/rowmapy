@@ -24,10 +24,15 @@ class Rowma:
         payload = { 'destination': destination, 'command': command }
         self.sio.emit('run_launch', data=payload, namespace=self.namespace)
 
-    def publish_topic(self, uuid, msg):
+    def publish(self, uuid, topic, msg):
         destination = { 'type': 'robot', 'uuid': uuid }
+        msg = {
+            "op": "publish",
+            "topic": topic,
+            "msg": msg
+        }
         payload = { 'destination': destination, 'msg': msg }
-        self.sio.emit('delegate', payload, namespace=self.namespace)
+        self.sio.emit('topic_transfer', payload, namespace=self.namespace)
 
     def set_topic_route(self, dest_uuid, topic_dest_type, topic_dest_uuid, topic):
         destination = { 'type': 'robot', 'uuid': dest_uuid }
@@ -41,7 +46,7 @@ class Rowma:
                 'destination': destination,
                 'msg': msg
                 }
-        self.sio.emit('delegate', payload, namespace=self.namespace)
+        self.sio.emit('topic_transfer', payload, namespace=self.namespace)
 
     def run_rosrun(self, uuid, command, args=''):
         destination = { 'type': 'robot', 'uuid': uuid }

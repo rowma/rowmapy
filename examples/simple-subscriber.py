@@ -4,8 +4,8 @@ import json
 rowma = Rowma()
 
 conn_list = rowma.get_current_connection_list()
-# Connect to the first robot in the official public network
-robot = rowma.get_robot_status(conn_list[0]['uuid'])
+# Get the first robot in the official public network
+robot = conn_list[0]
 rowma.connect()
 print('robot: '+robot['uuid'])
 print('application: '+rowma.uuid)
@@ -13,6 +13,7 @@ print('application: '+rowma.uuid)
 rowma.set_topic_route(robot['uuid'], 'application', rowma.uuid, '/chatter')
 
 def on_chatter(msg):
-    print('sample.py'+json.dumps(msg))
+    print(msg)
 
 rowma.subscribe('/chatter', on_chatter)
+rowma.publish(robot['uuid'], '/chatter', { "data": "topic from python" })
