@@ -15,9 +15,9 @@ class Rowma:
         self.sio.connect(self.base_url, namespaces=[self.namespace])
         # sleep 1 second for connection establishment
         self.sio.sleep(1)
-        payload = { 'deviceUuid': self.uuid }
-        self.sio.emit('register_device', data=payload, namespace=self.namespace)
-        self.sio.on('topic_to_device', handler=self._baseHandler, namespace=self.namespace)
+        payload = { 'applicationUuid': self.uuid }
+        self.sio.emit('register_application', data=payload, namespace=self.namespace)
+        self.sio.on('topic_to_application', handler=self._baseHandler, namespace=self.namespace)
 
     def run_launch(self, uuid, command):
         destination = { 'type': 'robot', 'uuid': uuid }
