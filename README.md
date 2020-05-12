@@ -1,4 +1,6 @@
 # RowmaPy
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3de604a0-ad5f-4d29-abb2-37118c634482/deploy-status)](https://app.netlify.com/sites/condescending-murdock-e43f8e/deploys)
+
 The Rowma SDK for Python.
 
 ## Usage
