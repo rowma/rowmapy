@@ -40,6 +40,7 @@ class Rowma:
 
     def run_launch(self, uuid, command):
         """Send `roslaunch` command to the specified robot
+
         Args:
             uuid (string): Robot UUID
             command (string): An argument of roslaunch command like 'my_pkg test.launch'
@@ -58,6 +59,7 @@ class Rowma:
 
     def publish(self, uuid, topic, msg):
         """Publish a topic to the specified robot
+
         Args:
             uuid (string): Robot UUID
             topic (string): Topic name
@@ -84,6 +86,7 @@ class Rowma:
 
     def set_topic_route(self, dest_uuid, topic_dest_type, topic_dest_uuid, topic):
         """Create a route of a topic
+
         Args:
             dest_uuid (string): The destination's UUID of this instruction
             topic_dest_type (string): 'robot' or 'application' for topic destination
@@ -115,6 +118,7 @@ class Rowma:
 
     def run_rosrun(self, uuid, command, args=''):
         """Send `rosrun` command to the specified robot
+
         Args:
             uuid (string): Robot UUID
             command (string): The first argument of rosrun command like 'my_pkg my_node'
@@ -138,6 +142,7 @@ class Rowma:
 
     def kill_nodes(self, uuid, rosnodes):
         """Kill running rosnodes in the specified robot
+
         Args:
             uuid (string): Robot UUID
             rosnodes (Array<string>): The array of rosnodes' name
@@ -159,6 +164,7 @@ class Rowma:
     # TODO: Error handling
     def get_current_connection_list(self):
         """Fetch currently connected robots from ConnectionManager
+
         Returns:
             Robot List (Array<dict>): An array of robots
 
@@ -172,6 +178,7 @@ class Rowma:
     # TODO: Error handling
     def get_robot_status(self, uuid):
         """Fetch a robot by uuid from ConnectionManager
+
         Args:
             uuid (string): Robot UUID
 
@@ -188,6 +195,7 @@ class Rowma:
 
     def subscribe(self, topic, handler):
         """Add subscriber function to a topic
+
         Args:
             uuid (string): Robot UUID
 
@@ -204,6 +212,7 @@ class Rowma:
 
     def set_robot_uuid(self, robot_uuid):
         """Set robot UUID to current Application data stored in ConnectionManager
+
         Args:
             uuid (string): Robot UUID
 
