@@ -61,10 +61,9 @@ class Rowma:
         destination = { 'type': 'robot', 'uuid': uuid }
         payload = {
                 'destination': destination,
-                'command': command,
-                'args': args
+                'rosnodes': rosnodes
                 }
-        self.sio.emit('run_rosrun', payload, namespace=self.namespace)
+        self.sio.emit('kill_rosnodes', payload, namespace=self.namespace)
 
     # TODO: Error handling
     def get_current_connection_list(self):
@@ -80,6 +79,7 @@ class Rowma:
     def subscribe(self, topic, handler, namespace=None):
         self.handlers[topic] = handler
 
+    # This method is used when subscribing roslaunch_log or rosrun_log
     def set_robot_uuid(self, robot_uuid):
         payload = {
                 'uuid': self.uuid,
