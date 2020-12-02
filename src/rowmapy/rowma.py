@@ -84,7 +84,7 @@ class Rowma:
         payload = { 'destination': destination, 'msg': topic_message }
         self.sio.emit('topic_transfer', payload, namespace=self.namespace)
 
-    def set_topic_route(self, dest_uuid, topic_dest_type, topic_dest_uuid, topic):
+    def set_topic_route(self, dest_uuid, topic_dest_type, topic_dest_uuid, topic, alias=None):
         """Create a route of a topic
 
         Args:
@@ -92,6 +92,7 @@ class Rowma:
             topic_dest_type (string): 'robot' or 'application' for topic destination
             topic_dest_uuid (string): The destination's UUID of the topic
             topic (string): Topic name
+            alias? (string): Alias of the topic name, default: None
 
         Returns:
             void: No return values
@@ -110,6 +111,7 @@ class Rowma:
           'topicDestination': topic_destination,
           'topic': topic
         }
+        if alias: msg.update({ 'alias': alias })
         payload = {
                 'destination': destination,
                 'msg': msg
