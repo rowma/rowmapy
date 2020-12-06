@@ -4,6 +4,9 @@
 The Rowma SDK for Python.
 
 ## Usage
+```
+pip install rowmapy
+```
 
 ### Publish
 ```py
