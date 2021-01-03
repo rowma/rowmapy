@@ -2,6 +2,7 @@ import socketio
 import uuid
 import json
 import requests
+import re
 
 class Rowma:
     """
@@ -235,6 +236,11 @@ class Rowma:
         self.sio.emit('update_application', payload, namespace=self.namespace)
 
     def _baseHandler(self, msg):
-        if msg['topic'] in self.handlers:
-            handler = self.handlers[msg['topic']]
-            handler(msg)
+        topics = self.handlers.keys()
+        handler = None
+        for topic in topics:
+            r = re.compile(topic)
+            if re.match(r, msg['topic']) is not None:
+                handler = self.handlers[topic]
+
+        handler(msg)
